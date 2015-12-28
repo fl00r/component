@@ -12,7 +12,7 @@ It is type unsafe and I don't know how it could be fixed with current golang sta
 ```go
 package main
 
-import component
+import github.com/fl00r/component
 // imaginable postgresql driver
 import pg
 
