@@ -39,15 +39,15 @@ func (d *Database) NewDatabase(args ...interface{}) component.Lifecicle {
   }
 }
 
-func (d *Database) Start(dependencies ...interface{}) component.Lifecicle {
-  d.connection = pg.Connect(d.host, d.port, d.database)
-  return d
+func (d *Database) Start(dependencies ...interface{}) error {
+  d.connection, err := pg.Connect(d.host, d.port, d.database)
+  return err
 }
 
-func (d *Database) Stop(dependencies ...interface{}) component.Lifecicle {
-  d.connection.Close()
+func (d *Database) Stop() error {
+  err := d.connection.Close()
   d.connection = nil
-  return d
+  return err
 }
 
 // ...

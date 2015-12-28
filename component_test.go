@@ -14,17 +14,17 @@ func NewSomeComponent(numbers ...interface{}) Lifecycle {
 	return &c
 }
 
-func (comp *SomeComponent) Start(components ...interface{}) Lifecycle {
+func (comp *SomeComponent) Start(components ...interface{}) error {
 	for _, c := range components {
 		comp.number += c.(*SomeComponent).number
 	}
 	fmt.Println(comp.number)
-	return comp
+	return nil
 }
 
-func (comp *SomeComponent) Stop() Lifecycle {
+func (comp *SomeComponent) Stop() error {
 	comp.number = 0
-	return comp
+	return nil
 }
 
 func TestSystem(t *testing.T) {
@@ -56,7 +56,10 @@ func TestSystem(t *testing.T) {
 		t.Fail()
 	}
 
-	system.Stop()
+	err = system.Stop()
+	if err != nil {
+		panic(err)
+	}
 	exp = 0
 	n = component3.entity.(*SomeComponent).number
 	if exp != n {

@@ -16,8 +16,8 @@ type Component struct {
 
 // Lifecycle ...
 type Lifecycle interface {
-	Start(dependencies ...interface{}) Lifecycle
-	Stop() Lifecycle
+	Start(dependencies ...interface{}) error
+	Stop() error
 }
 
 // NewSystem ...
@@ -88,8 +88,12 @@ func (s *System) Start() error {
 }
 
 // Stop ...
-func (s *System) Stop() {
+func (s *System) Stop() error {
 	for _, c := range s.components {
-		c.entity.Stop()
+		err := c.entity.Stop()
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }
