@@ -9,7 +9,7 @@ It is type unsafe and I don't know how it could be fixed with current golang sta
 
 # Usage
 
-```golang
+```go
 package main
 
 import component
