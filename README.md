@@ -31,7 +31,7 @@ type App {
   logLevel string
 }
 
-func (d *Database) NewDatabase(args ...interface{}) component.Lifecicle {
+func NewDatabase(args ...interface{}) component.Lifecicle {
   return &Database{
     host: args[0].(string),
     port: args[1].(int),
